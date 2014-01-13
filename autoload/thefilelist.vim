@@ -6,9 +6,14 @@ function! thefilelist#Refresh()
   if v:shell_error 
     normal! 1Gdd
     silent! read !find . \( -type d -name .hg -prune \) -o \( -type f -print \)
+  else
+    " remove hg status indicator 
+    silent! %s/^. //
   endif
-  normal! 1Gdd
-  silent! %s/^. //
+  " read !... leaves a blank line at the beginning
+  silent! normal! 1Gdd
+  " turn / into space -- this assumes gdefault is set 
+  silent! %s/\// /
   nohlsearch
   setlocal buftype=nofile bufhidden=hide noswapfile nowrap nomodifiable 
 endfunction
@@ -28,9 +33,8 @@ function! thefilelist#Display()
 endfunction
 
 function! thefilelist#Open()
-  wincmd gf
-  tabprev
-  wincmd P
+  let l=getline('.')
+  let filename=substitute(l, ' ', '/', 'g')
   wincmd c
-  tabnext
+  silent! execute 'tabe ' . filename
 endfunction
