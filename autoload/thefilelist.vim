@@ -23,7 +23,7 @@ function! thefilelist#Display()
   endif
   " Always refresh the file list if it is less than a 1000 lines
   if line('$') <# 1000 
-    call thefilelist#RefreshTheFileList()
+    call thefilelist#Refresh()
   endif
 endfunction
 
