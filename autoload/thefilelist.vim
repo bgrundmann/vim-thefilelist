@@ -15,7 +15,7 @@ function! thefilelist#Refresh()
   " turn / into space -- this assumes gdefault is set 
   silent! %s/\// /
   nohlsearch
-  setlocal buftype=nofile bufhidden=hide noswapfile nowrap nomodifiable 
+  setlocal buftype=nofile bufhidden=hide noswapfile nowrap nomodifiable nobuflisted
 endfunction
 
 function! thefilelist#Display()
